@@ -6,18 +6,21 @@ import pandas as pd
 data = pd.read_csv("datos.csv")
 data_dict = data.to_dict('list')
 celulares = data_dict['celular']
-planes = data_dict['plan']
-anios = data_dict['tiempo']
-informacion = zip(celulares,planes,anios)
+direcciones = data_dict['direccion']
+cedulas = data_dict['cedula']
+informacion = zip(celulares,direcciones,cedulas)
 first = True
 
-for celular,plan,anio in informacion:
-    web.open("https://web.whatsapp.com/send?phone="+celular+"&text=¡Hola! Mi nombre es Nicolas, asesor de Tigo, su línea " + celular[3:] + " tiene un plan "+plan+ " con más de "+str(anio)+" años de antigüedad y por ello cuenta con un *beneficio único*, que consiste en un descuento a su plan actual por adquirir una _segunda línea pospago_, en resumen, *por el mismo precio que esta pagando actualmente, tendría ¡dos líneas pospago!* Escríbame si desea conocer más acerca de este beneficio o si le gustaría que un asesor se comunicara para darle todos los detalles.")
-    if first:
-        tm.sleep(3)
-        first=False
-    tm.sleep(8)
-    pg.press("enter")
+for celular,direcciones,cedulas in informacion:
+    web.open("https://api.whatsapp.com/send?phone=+57"+str(celular)+"&text=¡Hola!, mi nombre es Nicolas, asesor de Tigo, su servicio hogar instalado en la dirección "+direcciones+" bajo cédula "+str(cedulas)+" tiene un un *beneficio único*, que consiste en adquirir un plan móvil con nosotros, con el primer mes gratis y el doble de megas en planes desde 45 mil pesos con ¡*50 GB* y minutos ilimitados! Escríbame si desea conocer más acerca de este beneficio o si le gustaría que un asesor se comunicara para darle todos los detalles.")
     tm.sleep(2)
+    if first:
+        tm.sleep(8)
+        first=False
+    tm.sleep(4)
+    pg.press("enter")
+    tm.sleep(1)
+    pg.hotkey('alt','tab')
+    tm.sleep(0.2)
     pg.hotkey('ctrl', 'w')
 print("Script ejecutado correctamente")

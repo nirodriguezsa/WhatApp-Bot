@@ -67,9 +67,9 @@ def bajarYcopiarDer():
 
 #Main
 tm.sleep(2)
-contador = 1
-filas = 2
-pyautogui.click(164, 400)
+contador = 0
+filas = 5
+pyautogui.click(164, 400) #Maximo 6 pestañas
 while(contador<filas):
     bajarYcopiarIz()
     consultaCedula()
